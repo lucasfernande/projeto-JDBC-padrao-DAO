@@ -1,7 +1,6 @@
 package db;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,10 +51,10 @@ public class DB {
 			throw new DbException(e.getMessage());
 		}
 	}
-    public static void closeStatement(Statement st) {
-    	if(st != null) {
+    public static void closeStatement(Statement ps) {
+    	if(ps != null) {
     		try {
-				st.close();
+				ps.close();
 			} catch (SQLException e) {
 				throw new DbException(e.getMessage());
 			}

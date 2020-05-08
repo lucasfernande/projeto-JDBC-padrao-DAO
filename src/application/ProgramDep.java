@@ -18,10 +18,17 @@ public class ProgramDep {
 		Department dep = ddao.findById(2);
 		System.out.println(dep);
 		
-		System.out.println("========= TEST 2: department insert =========");
+		System.out.println("\n========= TEST 2: department insert =========");
 		Department newDep = new Department(null, "Finances");
 		ddao.insert(newDep);
 		System.out.println("Inserted!");
+		
+		System.out.println("\n========= TEST 3: department update =========");
+		Department depart = ddao.findById(8);
+		depart.setName("Misc");
+		ddao.update(depart);
+		
+		System.out.println("Updated!");
 		
 		sc.close();
 
