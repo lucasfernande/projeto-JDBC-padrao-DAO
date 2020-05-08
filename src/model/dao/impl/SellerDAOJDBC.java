@@ -67,7 +67,7 @@ public class SellerDAOJDBC implements SellerDAO {
 
 	@Override
 	public void update(Seller obj) {
-PreparedStatement ps = null;
+        PreparedStatement ps = null;
 		
 		try {
 			
@@ -121,17 +121,17 @@ PreparedStatement ps = null;
 
 	@Override
 	public Seller findById(Integer id) {
-		PreparedStatement st = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement(
+			ps = conn.prepareStatement(
 					"SELECT seller.*,department.Name as DepName "
 					+ "FROM seller INNER JOIN department "
 					+ "ON seller.DepartmentId = department.Id "
 					+ "WHERE seller.Id = ?");
 			
-			st.setInt(1, id);
-			rs = st.executeQuery();
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				Department dep = instantiateDep(rs);
 				Seller obj = instantiateSeller(rs, dep);
@@ -143,7 +143,7 @@ PreparedStatement ps = null;
 			throw new DbException(e.getMessage());
 		}
 		finally {
-			DB.closeStatement(st);
+			DB.closeStatement(ps);
 			DB.closeResultSet(rs);
 		}
 	}
@@ -168,16 +168,16 @@ PreparedStatement ps = null;
 
 	@Override
 	public List<Seller> findAll() {
-		PreparedStatement st = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement(
+			ps = conn.prepareStatement(
 					"SELECT seller.*,department.Name as DepName "
 					+ "FROM seller INNER JOIN department "
 					+ "ON seller.DepartmentId = department.Id "
 					+ "ORDER BY Id");
 			
-			rs = st.executeQuery();
+			rs = ps.executeQuery();
 			
 			List<Seller> list = new ArrayList<>();
 			Map<Integer, Department> map = new HashMap<>();
@@ -200,7 +200,7 @@ PreparedStatement ps = null;
 			throw new DbException(e.getMessage());
 		}
 		finally {
-			DB.closeStatement(st);
+			DB.closeStatement(ps);
 			DB.closeResultSet(rs);
 		}
 	}
