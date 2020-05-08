@@ -20,7 +20,7 @@ public class ProgramDep {
 		System.out.println(dep);
 		
 		System.out.println("\n========= TEST 3: department update =========");
-		Department depart = ddao.findById(8);
+		Department depart = ddao.findById(3);
 		depart.setName("Misc");
 		ddao.update(depart);
 		
@@ -32,6 +32,13 @@ public class ProgramDep {
 		for (Department departs : deps) {
 			System.out.println(departs);
 		}
+		
+		System.out.println("\n========== TEST 5: department delete ==========");
+		System.out.print("Enter id for delete test: ");
+		int id = sc.nextInt();
+		ddao.deleteById(id);
+		
+		System.out.println("Deleted");
 		
 		sc.close();
 
